@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Backend/">
+    <Project Path="src/Backend/EsperancaSolidaria.Campanha.API/EsperancaSolidaria.Campanha.API.csproj" Id="fba3d95d-1856-46f1-8bce-534ae175821d" />
+    <Project Path="src/Backend/EsperancaSolidaria.Campanha.Application/EsperancaSolidaria.Campanha.Application.csproj" Id="bfee1368-4a5c-48a4-80c2-7a3b56f84e43" />
+    <Project Path="src/Backend/EsperancaSolidaria.Campanha.Domain/EsperancaSolidaria.Campanha.Domain.csproj" Id="3ac03ecd-0b67-41f7-b4a9-ef91d06662b8" />
+    <Project Path="src/Backend/EsperancaSolidaria.Campanha.Infrastructure/EsperancaSolidaria.Campanha.Infrastructure.csproj" Id="1d0dd449-92c5-4c56-9932-aa82f3c96d2a" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/EsperancaSolidaria.Campanha.Communication/EsperancaSolidaria.Campanha.Communication.csproj" Id="69e05918-fa6e-4859-978f-6c6635b58be9" />
+    <Project Path="src/Shared/EsperancaSolidaria.Campanha.Exceptions/EsperancaSolidaria.Campanha.Exceptions.csproj" Id="76d1851a-0925-4bba-a586-81f1b929c671" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
