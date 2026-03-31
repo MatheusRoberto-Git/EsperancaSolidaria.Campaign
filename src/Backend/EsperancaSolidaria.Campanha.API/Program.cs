@@ -5,20 +5,37 @@ using EsperancaSolidaria.Campanha.Application;
 using EsperancaSolidaria.Campanha.Infrastructure;
 using EsperancaSolidaria.Campanha.Infrastructure.Extensions;
 using EsperancaSolidaria.Campanha.Infrastructure.Migrations;
+using Microsoft.OpenApi;
+
+const string AUTHENTICATION_SCHEME = "Bearer";
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter()));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OperationFilter<IdsFilter>();
+
+    options.AddSecurityDefinition(AUTHENTICATION_SCHEME, new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = AUTHENTICATION_SCHEME,
+        BearerFormat = "JWT",
+        Description = "JWT Authorization header using the Bearer scheme."
+    });
+
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference(AUTHENTICATION_SCHEME, document)] = []
+    });
+});
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-
-builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

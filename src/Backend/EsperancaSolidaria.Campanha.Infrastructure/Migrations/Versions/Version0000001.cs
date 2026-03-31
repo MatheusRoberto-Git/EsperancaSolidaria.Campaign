@@ -9,7 +9,7 @@ namespace EsperancaSolidaria.Campanha.Infrastructure.Migrations.Versions
         {
             CreateTable("Campaigns")
                 .WithColumn("Title").AsString(255).NotNullable()
-                .WithColumn("Description").AsString(255).NotNullable()
+                .WithColumn("Description").AsString(2000).NotNullable()
                 .WithColumn("StartDate").AsDateTime().NotNullable()
                 .WithColumn("EndDate").AsDateTime().NotNullable()
                 .WithColumn("FinancialGoal").AsDecimal().NotNullable()

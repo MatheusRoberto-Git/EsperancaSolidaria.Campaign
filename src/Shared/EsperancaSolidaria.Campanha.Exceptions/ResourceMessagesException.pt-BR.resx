@@ -141,4 +141,13 @@
   <data name="NON_0_FINANCIAL_GOAL" xml:space="preserve">
     <value>A meta financeira não pode ser 0 ou negativa.</value>
   </data>
+  <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
+    <value>Usuário sem permissão para acessar esse recurso.</value>
+  </data>
+  <data name="NO_TOKEN" xml:space="preserve">
+    <value>Acesso negado. O cabeçalho 'Authorization' é obrigatório para esta requisição.</value>
+  </data>
+  <data name="TOKEN_EXPIRED" xml:space="preserve">
+    <value>O token expirou.</value>
+  </data>
 </root>

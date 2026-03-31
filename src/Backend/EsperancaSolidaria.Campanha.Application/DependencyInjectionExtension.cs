@@ -2,6 +2,7 @@
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sqids;
 
 namespace EsperancaSolidaria.Campanha.Application
 {
@@ -10,12 +11,24 @@ namespace EsperancaSolidaria.Campanha.Application
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             AddMapsterConfiguration();
+            AddIdEncoder(services, configuration);
             AddUseCases(services);
         }
 
         private static void AddMapsterConfiguration()
         {
             MapConfigs.Configure();
+        }
+
+        private static void AddIdEncoder(IServiceCollection services, IConfiguration configuration)
+        {
+            var sqids = new SqidsEncoder<long>(new()
+            {
+                MinLength = 3,
+                Alphabet = configuration.GetValue<string>("Settings:IdCryptographyAlphabet")!
+            });
+
+            services.AddSingleton(sqids);
         }
 
         private static void AddUseCases(IServiceCollection services)

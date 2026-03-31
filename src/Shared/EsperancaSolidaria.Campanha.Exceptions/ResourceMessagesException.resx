@@ -141,4 +141,13 @@
   <data name="NON_0_FINANCIAL_GOAL" xml:space="preserve">
     <value>The financial goal cannot be 0 or negative.</value>
   </data>
+  <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
+    <value>User does not have permission to access this resource.</value>
+  </data>
+  <data name="NO_TOKEN" xml:space="preserve">
+    <value>Access denied. The 'Authorization' header is required for this request.</value>
+  </data>
+  <data name="TOKEN_EXPIRED" xml:space="preserve">
+    <value>Token is expired.</value>
+  </data>
 </root>

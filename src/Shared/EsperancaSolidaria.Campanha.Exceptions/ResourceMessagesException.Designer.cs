@@ -88,6 +88,15 @@ namespace EsperancaSolidaria.Campanha.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access denied. The &apos;Authorization&apos; header is required for this request..
+        /// </summary>
+        public static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The financial goal cannot be 0 or negative..
         /// </summary>
         public static string NON_0_FINANCIAL_GOAL {
@@ -124,11 +133,29 @@ namespace EsperancaSolidaria.Campanha.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Token is expired..
+        /// </summary>
+        public static string TOKEN_EXPIRED {
+            get {
+                return ResourceManager.GetString("TOKEN_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error..
         /// </summary>
         public static string UNKNOW_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User does not have permission to access this resource..
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
             }
         }
     }

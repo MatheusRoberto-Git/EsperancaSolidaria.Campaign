@@ -1,8 +1,10 @@
 ﻿using EsperancaSolidaria.Campanha.Domain.Repositories;
 using EsperancaSolidaria.Campanha.Domain.Repositories.Campaign;
+using EsperancaSolidaria.Campanha.Domain.Security.Tokens;
 using EsperancaSolidaria.Campanha.Infrastructure.DataAccess;
 using EsperancaSolidaria.Campanha.Infrastructure.DataAccess.Repositories;
 using EsperancaSolidaria.Campanha.Infrastructure.Extensions;
+using EsperancaSolidaria.Campanha.Infrastructure.Security.Tokens.Access.Validator;
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +18,7 @@ namespace EsperancaSolidaria.Campanha.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             AddRepositories(services);
+            AddTokens(services, configuration);
 
             AddDbContext(services, configuration);
             AddFluentMigrator(services, configuration);
@@ -42,6 +45,13 @@ namespace EsperancaSolidaria.Campanha.Infrastructure
                 .WithGlobalConnectionString(connectionString)
                 .ScanIn(Assembly.Load("EsperancaSolidaria.Campanha.Infrastructure")).For.All();
             });
+        }
+
+        private static void AddTokens(IServiceCollection services, IConfiguration configuration)
+        {
+            var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
+
+            services.AddScoped<IAccessTokenValidator>(options => new JwtTokenValidator(signingKey!));
         }
 
         private static void AddRepositories(IServiceCollection services)
