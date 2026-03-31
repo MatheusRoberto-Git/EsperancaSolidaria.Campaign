@@ -13,7 +13,7 @@ namespace EsperancaSolidaria.Campanha.Infrastructure.Migrations.Versions
                 .WithColumn("StartDate").AsDateTime().NotNullable()
                 .WithColumn("EndDate").AsDateTime().NotNullable()
                 .WithColumn("FinancialGoal").AsDecimal().NotNullable()
-                .WithColumn("AmountRaised").AsDecimal().NotNullable()
+                .WithColumn("AmountRaised").AsDecimal().NotNullable().WithDefaultValue(0)
                 .WithColumn("Status").AsInt32().NotNullable();
         }
     }
