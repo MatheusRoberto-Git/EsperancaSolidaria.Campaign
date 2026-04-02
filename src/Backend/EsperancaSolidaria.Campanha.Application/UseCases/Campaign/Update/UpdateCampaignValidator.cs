@@ -17,7 +17,7 @@ namespace EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Update
                 .WithMessage(ResourceMessagesException.DESCRIPTION_EMPTY);
 
             RuleFor(campaign => campaign.StartDate)
-                .NotEmpty()
+                .NotEqual(default(DateTime))
                 .WithMessage(ResourceMessagesException.START_DATE_EMPTY);
 
             RuleFor(campaign => campaign.EndDate)
