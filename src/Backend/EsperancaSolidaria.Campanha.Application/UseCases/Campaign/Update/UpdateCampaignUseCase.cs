@@ -41,10 +41,10 @@ namespace EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Update
             Validate(request);
 
             // Mapear a request em uma entidade
-            var mapper = request.Adapt<Domain.Entities.Campaign>();
+            request.Adapt(campaign);
 
             // Salvar no BD
-            _repository.Update(mapper);
+            _repository.Update(campaign);
             await _unitOfWork.Commit();
         }
 
