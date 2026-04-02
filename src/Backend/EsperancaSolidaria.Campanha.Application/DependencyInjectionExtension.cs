@@ -1,4 +1,5 @@
 ﻿using EsperancaSolidaria.Campanha.Application.Services.Mapster;
+using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,7 @@ namespace EsperancaSolidaria.Campanha.Application
         private static void AddUseCases(IServiceCollection services)
         {
             services.AddScoped<IRegisterCampaignUseCase, RegisterCampaignUseCase>();
+            services.AddScoped<IGetCampaignsUseCase, GetCampaignsUseCase>();
         }
     }
 }
