@@ -1,6 +1,8 @@
 ﻿using EsperancaSolidaria.Campanha.API.Attributes;
+using EsperancaSolidaria.Campanha.API.Binders;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register;
+using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Update;
 using EsperancaSolidaria.Campanha.Communication.Requests;
 using EsperancaSolidaria.Campanha.Communication.Responses;
 using EsperancaSolidaria.Campanha.Domain.Enums;
@@ -19,6 +21,19 @@ namespace EsperancaSolidaria.Campanha.API.Controllers
             var response = await useCase.Execute(request);
 
             return Created(string.Empty, response);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [AuthenticatedUser]
+        [AuthorizeRole(UserRole.GestorONG)]
+        public async Task<IActionResult> Update([FromServices] IUpdateCampaignUseCase useCase, [FromRoute][ModelBinder(typeof(EsperancaSolidariaCampaignBinder))] long id, [FromBody] RequestUpdateCampaignJson request)
+        {
+            await useCase.Execute(id, request);
+
+            return NoContent();
         }
 
         [HttpGet]

@@ -61,6 +61,24 @@ namespace EsperancaSolidaria.Campanha.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This campaign has already been closed..
+        /// </summary>
+        public static string CAMPAIGN_ALREADY_CLOSED {
+            get {
+                return ResourceManager.GetString("CAMPAIGN_ALREADY_CLOSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The campaign could not be found..
+        /// </summary>
+        public static string CAMPAIGN_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CAMPAIGN_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The description cannot be empty..
         /// </summary>
         public static string DESCRIPTION_EMPTY {
@@ -84,6 +102,15 @@ namespace EsperancaSolidaria.Campanha.Exceptions {
         public static string FINANCIAL_GOAL_EMPTY {
             get {
                 return ResourceManager.GetString("FINANCIAL_GOAL_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The campaign status is invalid..
+        /// </summary>
+        public static string INVALID_STATUS {
+            get {
+                return ResourceManager.GetString("INVALID_STATUS", resourceCulture);
             }
         }
         

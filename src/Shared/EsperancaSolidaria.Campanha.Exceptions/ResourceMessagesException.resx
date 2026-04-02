@@ -150,4 +150,13 @@
   <data name="TOKEN_EXPIRED" xml:space="preserve">
     <value>Token is expired.</value>
   </data>
+  <data name="CAMPAIGN_NOT_FOUND" xml:space="preserve">
+    <value>The campaign could not be found.</value>
+  </data>
+  <data name="CAMPAIGN_ALREADY_CLOSED" xml:space="preserve">
+    <value>This campaign has already been closed.</value>
+  </data>
+  <data name="INVALID_STATUS" xml:space="preserve">
+    <value>The campaign status is invalid.</value>
+  </data>
 </root>

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EsperancaSolidaria.Campanha.Infrastructure.DataAccess.Repositories
 {
-    public class CampaignRepositories : ICampaignWriteOnlyRepository, ICampaignReadOnlyRepository
+    public class CampaignRepositories : ICampaignWriteOnlyRepository, ICampaignReadOnlyRepository, ICampaignUpdateOnlyRepository
     {
         private readonly EsperancaSolidariaCampanhaDbContext _dbContext;
 
@@ -22,5 +22,14 @@ namespace EsperancaSolidaria.Campanha.Infrastructure.DataAccess.Repositories
                 .OrderBy(c => c.CreatedOn)
                 .ToListAsync();
         }
+
+        public async Task<Campaign?> GetById(long campaignId)
+        {
+            return await _dbContext
+                .Campaigns
+                .FirstOrDefaultAsync(c => c.Id == campaignId && c.Active);
+        }
+
+        public void Update(Campaign campaign) => _dbContext.Campaigns.Update(campaign);
     }
 }

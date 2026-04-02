@@ -11,6 +11,13 @@ namespace EsperancaSolidaria.Campanha.Application.Services.Mapster
             TypeAdapterConfig<RequestRegisterCampaignJson, Campaign>
                 .NewConfig()
                 .Ignore(dest => dest.AmountRaised);
+
+            TypeAdapterConfig<RequestUpdateCampaignJson, Campaign>
+                .NewConfig()
+                .Ignore(dest => dest.AmountRaised)
+                .Ignore(dest => dest.Active)
+                .Ignore(dest => dest.CreatedOn)
+                .Ignore(dest => dest.Id);
         }
     }
 }
