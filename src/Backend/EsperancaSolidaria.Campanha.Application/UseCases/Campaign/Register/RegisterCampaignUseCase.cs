@@ -5,6 +5,7 @@ using EsperancaSolidaria.Campanha.Domain.Repositories;
 using EsperancaSolidaria.Campanha.Domain.Repositories.Campaign;
 using EsperancaSolidaria.Campanha.Exceptions.ExceptionsBase;
 using Mapster;
+using Sqids;
 
 namespace EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register
 {
@@ -12,11 +13,13 @@ namespace EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register
     {
         private readonly ICampaignWriteOnlyRepository _campaignWriteOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly SqidsEncoder<long> _idEncoder;
 
-        public RegisterCampaignUseCase(ICampaignWriteOnlyRepository campaignWriteOnlyRepository, IUnitOfWork unitOfWork)
+        public RegisterCampaignUseCase(ICampaignWriteOnlyRepository campaignWriteOnlyRepository, IUnitOfWork unitOfWork, SqidsEncoder<long> idEncoder)
         {
             _campaignWriteOnlyRepository = campaignWriteOnlyRepository;
             _unitOfWork = unitOfWork;
+            _idEncoder = idEncoder;
         }
 
         public async Task<ResponseRegisteredCampaignJson> Execute(RequestRegisterCampaignJson request)
@@ -37,6 +40,7 @@ namespace EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register
 
             return new ResponseRegisteredCampaignJson
             {
+                Id = _idEncoder.Encode(campaign.Id),
                 Title = campaign.Title
             };
         }

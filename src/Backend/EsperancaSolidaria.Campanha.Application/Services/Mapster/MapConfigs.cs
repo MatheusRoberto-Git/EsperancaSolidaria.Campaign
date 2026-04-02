@@ -10,7 +10,8 @@ namespace EsperancaSolidaria.Campanha.Application.Services.Mapster
         {
             TypeAdapterConfig<RequestRegisterCampaignJson, Campaign>
                 .NewConfig()
-                .Ignore(dest => dest.AmountRaised);
+                .Ignore(dest => dest.AmountRaised)
+                .Ignore(dest => dest.Status);
 
             TypeAdapterConfig<RequestUpdateCampaignJson, Campaign>
                 .NewConfig()
