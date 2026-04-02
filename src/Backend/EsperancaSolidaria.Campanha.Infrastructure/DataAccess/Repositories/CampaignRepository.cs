@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EsperancaSolidaria.Campanha.Infrastructure.DataAccess.Repositories
 {
-    public class CampaignRepositories : ICampaignWriteOnlyRepository, ICampaignReadOnlyRepository, ICampaignUpdateOnlyRepository
+    public class CampaignRepository : ICampaignWriteOnlyRepository, ICampaignReadOnlyRepository, ICampaignUpdateOnlyRepository
     {
         private readonly EsperancaSolidariaCampanhaDbContext _dbContext;
 
-        public CampaignRepositories(EsperancaSolidariaCampanhaDbContext dbContext) => _dbContext = dbContext;
+        public CampaignRepository(EsperancaSolidariaCampanhaDbContext dbContext) => _dbContext = dbContext;
 
         public async Task Add(Campaign campaign) => await _dbContext.Campaigns.AddAsync(campaign);
 

@@ -58,9 +58,9 @@ namespace EsperancaSolidaria.Campanha.Infrastructure
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<ICampaignWriteOnlyRepository, CampaignRepositories>();
-            services.AddScoped<ICampaignReadOnlyRepository, CampaignRepositories>();
-            services.AddScoped<ICampaignUpdateOnlyRepository, CampaignRepositories>();
+            services.AddScoped<ICampaignWriteOnlyRepository, CampaignRepository>();
+            services.AddScoped<ICampaignReadOnlyRepository, CampaignRepository>();
+            services.AddScoped<ICampaignUpdateOnlyRepository, CampaignRepository>();
         }        
     }
 }
