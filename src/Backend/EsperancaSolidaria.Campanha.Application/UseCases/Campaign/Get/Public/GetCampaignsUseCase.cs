@@ -2,7 +2,7 @@
 using EsperancaSolidaria.Campanha.Communication.Responses;
 using EsperancaSolidaria.Campanha.Domain.Repositories.Campaign;
 
-namespace EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get
+namespace EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get.Public
 {
     public class GetCampaignsUseCase : IGetCampaignsUseCase
     {

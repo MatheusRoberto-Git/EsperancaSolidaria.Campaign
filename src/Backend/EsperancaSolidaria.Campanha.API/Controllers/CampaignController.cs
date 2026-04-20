@@ -1,6 +1,7 @@
 ﻿using EsperancaSolidaria.Campanha.API.Attributes;
 using EsperancaSolidaria.Campanha.API.Binders;
-using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get;
+using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get.Admin;
+using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get.Public;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Update;
 using EsperancaSolidaria.Campanha.Communication.Requests;
@@ -40,6 +41,23 @@ namespace EsperancaSolidaria.Campanha.API.Controllers
         [ProducesResponseType(typeof(ResponseCampaignsJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get([FromServices] IGetCampaignsUseCase useCase)
+        {
+            var response = await useCase.Execute();
+
+            if(response.Campaigns.Any())
+            {
+                return Ok(response);
+            }
+
+            return NoContent();
+        }
+
+        [HttpGet("campanha-gestor")]
+        [ProducesResponseType(typeof(ResponseCampaignsJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [AuthenticatedUser]
+        [AuthorizeRole(UserRole.GestorONG)]
+        public async Task<IActionResult> GetGestor([FromServices] IGetCampaignsAdminUseCase useCase)
         {
             var response = await useCase.Execute();
 
