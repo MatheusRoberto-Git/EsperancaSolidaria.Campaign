@@ -174,3 +174,7 @@ kubectl get pods -l app=campanha-api
 | `Settings__RabbitMq__UserName` | Usuário do RabbitMQ |
 | `Settings__RabbitMq__Password` | Senha do RabbitMQ |
 | `Settings__IdCryptographyAlphabet` | Alfabeto para Sqids |
+
+## Arquitetura
+
+![Arquitetura Conexão Solidária](architecture.svg)
