@@ -23,10 +23,18 @@ namespace EsperancaSolidaria.Campanha.Infrastructure.DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Campaign?> GetById(long campaignId)
+        async Task<Campaign?> ICampaignUpdateOnlyRepository.GetById(long campaignId)
         {
             return await _dbContext
                 .Campaigns
+                .FirstOrDefaultAsync(c => c.Id == campaignId && c.Active);
+        }
+
+        async Task<Campaign?> ICampaignReadOnlyRepository.GetById(long campaignId)
+        {
+            return await _dbContext
+                .Campaigns
+                .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == campaignId && c.Active);
         }
 

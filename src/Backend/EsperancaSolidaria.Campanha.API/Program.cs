@@ -3,6 +3,7 @@ using EsperancaSolidaria.Campanha.API.Filters;
 using EsperancaSolidaria.Campanha.API.Middleware;
 using EsperancaSolidaria.Campanha.Application;
 using EsperancaSolidaria.Campanha.Infrastructure;
+using EsperancaSolidaria.Campanha.Infrastructure.DataAccess;
 using EsperancaSolidaria.Campanha.Infrastructure.Extensions;
 using EsperancaSolidaria.Campanha.Infrastructure.Migrations;
 using Microsoft.OpenApi;
@@ -37,6 +38,9 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
+builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks().AddDbContextCheck<EsperancaSolidariaCampanhaDbContext>();
+
 var app = builder.Build();
 
 if(app.Environment.IsDevelopment())
@@ -50,6 +54,8 @@ app.UseMiddleware<CultureMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapHealthChecks("/health");
 
 MigrateDatabase();
 

@@ -6,10 +6,11 @@ namespace EsperancaSolidaria.Campanha.Application.Extensions
 {
     public static class CampaignListExtension
     {
-        public static IList<ResponseShortCampaignJson> MapToShortCampaignResponseJson(this IList<Campaign> campaigns)
+        public static IList<ResponseShortCampaignJson> MapToShortCampaignResponseJson(this IList<Campaign> campaigns, SqidsEncoder<long> idEncoder)
         {
             return campaigns.Select(campaign => new ResponseShortCampaignJson
             {
+                Id = idEncoder.Encode(campaign.Id),
                 Title = campaign.Title,
                 FinancialGoal = campaign.FinancialGoal,
                 AmountRaised = campaign.AmountRaised,

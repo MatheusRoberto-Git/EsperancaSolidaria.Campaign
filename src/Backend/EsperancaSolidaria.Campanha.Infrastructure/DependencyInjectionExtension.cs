@@ -1,14 +1,17 @@
-﻿using EsperancaSolidaria.Campanha.Domain.Repositories;
+﻿using EsperancaSolidaria.Campanha.Domain.Messaging;
+using EsperancaSolidaria.Campanha.Domain.Repositories;
 using EsperancaSolidaria.Campanha.Domain.Repositories.Campaign;
 using EsperancaSolidaria.Campanha.Domain.Security.Tokens;
 using EsperancaSolidaria.Campanha.Infrastructure.DataAccess;
 using EsperancaSolidaria.Campanha.Infrastructure.DataAccess.Repositories;
 using EsperancaSolidaria.Campanha.Infrastructure.Extensions;
+using EsperancaSolidaria.Campanha.Infrastructure.Messaging;
 using EsperancaSolidaria.Campanha.Infrastructure.Security.Tokens.Access.Validator;
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
 using System.Reflection;
 
 namespace EsperancaSolidaria.Campanha.Infrastructure
@@ -18,10 +21,11 @@ namespace EsperancaSolidaria.Campanha.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             AddRepositories(services);
-            AddTokens(services, configuration);
+            AddTokens(services, configuration);            
 
             AddDbContext(services, configuration);
             AddFluentMigrator(services, configuration);
+            AddMessaging(services, configuration);
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
@@ -61,6 +65,18 @@ namespace EsperancaSolidaria.Campanha.Infrastructure
             services.AddScoped<ICampaignWriteOnlyRepository, CampaignRepository>();
             services.AddScoped<ICampaignReadOnlyRepository, CampaignRepository>();
             services.AddScoped<ICampaignUpdateOnlyRepository, CampaignRepository>();
-        }        
+        }
+
+        private static void AddMessaging(IServiceCollection services, IConfiguration configuration)
+        {
+            var factory = new ConnectionFactory
+            {
+                HostName = configuration.GetValue<string>("Settings:RabbitMq:HostName")!,
+                UserName = configuration.GetValue<string>("Settings:RabbitMq:UserName")!,
+                Password = configuration.GetValue<string>("Settings:RabbitMq:Password")!
+            };
+
+            services.AddSingleton<IMessagePublisher>(_ => RabbitMqPublisher.CreateAsync(factory).GetAwaiter().GetResult());
+        }
     }
 }

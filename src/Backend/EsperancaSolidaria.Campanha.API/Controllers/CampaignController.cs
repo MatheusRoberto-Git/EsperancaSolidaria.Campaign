@@ -1,5 +1,6 @@
 ﻿using EsperancaSolidaria.Campanha.API.Attributes;
 using EsperancaSolidaria.Campanha.API.Binders;
+using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Donation;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get.Admin;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get.Public;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register;
@@ -52,7 +53,7 @@ namespace EsperancaSolidaria.Campanha.API.Controllers
             return NoContent();
         }
 
-        [HttpGet("campanha-gestor")]
+        [HttpGet("campaign-admin")]
         [ProducesResponseType(typeof(ResponseCampaignsJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [AuthenticatedUser]
@@ -65,6 +66,17 @@ namespace EsperancaSolidaria.Campanha.API.Controllers
             {
                 return Ok(response);
             }
+
+            return NoContent();
+        }
+
+        [HttpPost("donation")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [AuthenticatedUser]
+        [AuthorizeRole(UserRole.Doador)]
+        public async Task<IActionResult> Donation([FromServices] IDonationUseCase useCase, [FromBody] RequestDonationJson request)
+        {
+            await useCase.Execute(request);
 
             return NoContent();
         }

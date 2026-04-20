@@ -159,4 +159,10 @@
   <data name="INVALID_STATUS" xml:space="preserve">
     <value>The campaign status is invalid.</value>
   </data>
+  <data name="CAMPAIGN_ID_EMPTY" xml:space="preserve">
+    <value>Please provide the ID of the campaign you wish to donate to.</value>
+  </data>
+  <data name="DONATION_AMOUNT_INVALID" xml:space="preserve">
+    <value>Invalid donation amount.</value>
+  </data>
 </root>

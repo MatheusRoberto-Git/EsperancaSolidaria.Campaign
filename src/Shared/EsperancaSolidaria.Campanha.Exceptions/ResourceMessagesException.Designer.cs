@@ -70,6 +70,15 @@ namespace EsperancaSolidaria.Campanha.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide the ID of the campaign you wish to donate to..
+        /// </summary>
+        public static string CAMPAIGN_ID_EMPTY {
+            get {
+                return ResourceManager.GetString("CAMPAIGN_ID_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The campaign could not be found..
         /// </summary>
         public static string CAMPAIGN_NOT_FOUND {
@@ -84,6 +93,15 @@ namespace EsperancaSolidaria.Campanha.Exceptions {
         public static string DESCRIPTION_EMPTY {
             get {
                 return ResourceManager.GetString("DESCRIPTION_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid donation amount..
+        /// </summary>
+        public static string DONATION_AMOUNT_INVALID {
+            get {
+                return ResourceManager.GetString("DONATION_AMOUNT_INVALID", resourceCulture);
             }
         }
         

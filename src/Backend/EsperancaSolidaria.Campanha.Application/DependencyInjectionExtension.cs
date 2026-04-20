@@ -1,4 +1,5 @@
 ﻿using EsperancaSolidaria.Campanha.Application.Services.Mapster;
+using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Donation;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get.Admin;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Get.Public;
 using EsperancaSolidaria.Campanha.Application.UseCases.Campaign.Register;
@@ -40,6 +41,7 @@ namespace EsperancaSolidaria.Campanha.Application
             services.AddScoped<IGetCampaignsUseCase, GetCampaignsUseCase>();
             services.AddScoped<IGetCampaignsAdminUseCase, GetCampaignsAdminUseCase>();
             services.AddScoped<IUpdateCampaignUseCase, UpdateCampaignUseCase>();
+            services.AddScoped<IDonationUseCase, DonationUseCase>();
         }
     }
 }
