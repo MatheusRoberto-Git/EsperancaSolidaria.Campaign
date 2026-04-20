@@ -7,12 +7,17 @@ using EsperancaSolidaria.Campanha.Infrastructure.DataAccess;
 using EsperancaSolidaria.Campanha.Infrastructure.Extensions;
 using EsperancaSolidaria.Campanha.Infrastructure.Migrations;
 using Microsoft.OpenApi;
+using Prometheus;
 
 const string AUTHENTICATION_SCHEME = "Bearer";
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter()));
+
+// Prometheus metrics
+builder.Services.AddMetrics();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -54,6 +59,9 @@ app.UseMiddleware<CultureMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+// Prometheus metrics
+app.MapMetrics();
 
 app.MapHealthChecks("/health");
 
